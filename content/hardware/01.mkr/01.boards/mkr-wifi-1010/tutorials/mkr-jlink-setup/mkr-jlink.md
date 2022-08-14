@@ -126,18 +126,21 @@ void setup() {
   delay(1000);
 }
 
-  void loop() {
-
-    if (millis() >= timer1 + period1) {
-      timer1 = millis();
-      countVar1++;
-      WiFiDrv::digitalWrite(27, !digitalRead(27));
-    }
-
-    if (millis() >= timer2 + period2) {
-      timer2 = millis();
-      countVar2++;
-      WiFiDrv::digitalWrite(26, !digitalRead(26));
-    }
+void loop() {
+  if (millis() >= timer1 + period1) {
+    timer1 = millis();
+    countVar1++;
+    static bool bBlue = LOW;
+    bBlue = !bBlue;
+    WiFiDrv::digitalWrite(27, bBlue);
   }
+
+  if (millis() >= timer2 + period2) {
+    timer2 = millis();
+    countVar2++;
+    static bool bGreen = LOW;
+    bGreen = !bGreen;
+    WiFiDrv::digitalWrite(26, bGreen);
+  }
+}
 ```
